@@ -23,7 +23,10 @@ export const updateTaskSchema = z
 
 export const taskParamsSchema = z.object({
   projectId: z.uuid(),
-  id: z.uuid().optional(),
+});
+
+export const taskIdSchema = z.object({
+  id: z.uuid(),
 });
 
 export const taskQuerySchema = z.object({

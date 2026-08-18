@@ -10,6 +10,7 @@ import {
   createTaskSchema,
   updateTaskSchema,
   taskParamsSchema,
+  taskIdSchema,
   taskQuerySchema,
 } from "./task.validation";
 
@@ -25,6 +26,7 @@ router
 
 router
   .route("/:id")
+  .all(validateParams(taskIdSchema))
   .get(taskController.getTaskById)
   .patch(validate(updateTaskSchema), taskController.updateTask)
   .delete(taskController.deleteTask);
