@@ -2,6 +2,7 @@ import express from "express";
 import helmet from "helmet";
 import cors from "cors";
 import { authRouter } from "./modules/auth/auth.routes";
+import { projectRouter } from "./modules/projects/project.routes";
 import { notFoundHandler, errorHandler } from "./middlewares/error.middleware";
 
 export const app = express();
@@ -18,6 +19,7 @@ app.get("/health", (req, res) => {
 
 // Feature routes
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/projects", projectRouter);
 
 // Error handling — must stay last
 app.use(notFoundHandler);
