@@ -26,6 +26,12 @@ interface TaskFilters {
   priority?: TaskPriority;
 }
 
+export const parseFilters = (query: unknown): TaskFilters => {
+  const { status, priority } = query as TaskFilters;
+
+  return { status, priority };
+};
+
 export const createTask = async (
   userId: string,
   projectId: string,

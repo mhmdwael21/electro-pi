@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as projectController from "./project.controller";
+import { taskRouter } from "../tasks/task.routes";
 import { authenticate } from "../../middlewares/auth.middleware";
 import { validate, validateParams } from "../../middlewares/validate.middleware";
 import {
@@ -11,6 +12,8 @@ import {
 const router = Router();
 
 router.use(authenticate);
+
+router.use("/:projectId/tasks", taskRouter);
 
 router
   .route("/")
