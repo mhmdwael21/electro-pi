@@ -1,6 +1,8 @@
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./docs/swagger";
 import { authRouter } from "./modules/auth/auth.routes";
 import { projectRouter } from "./modules/projects/project.routes";
 import { notFoundHandler, errorHandler } from "./middlewares/error.middleware";
@@ -17,10 +19,13 @@ app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
+// API documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 // Feature routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/projects", projectRouter);
 
-// Error handling — must stay last
+// Error handling 
 app.use(notFoundHandler);
 app.use(errorHandler);
